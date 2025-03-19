@@ -47,6 +47,13 @@ namespace ContaBancariaGeen.Services
 
         public Cliente AtualizarCliente()
         {
+            if(!_clientes.Any())
+            {
+                WriteLine("Não existem clientes cadastrados para serem atualizados, redirecionado ao cadastro...");
+                var clienteNovo = CadastraCliente();
+                return clienteNovo;
+            }
+
             WriteLine("Qual cliente você gostaria de atualizar?");
 
             foreach(var c in  _clientes)
