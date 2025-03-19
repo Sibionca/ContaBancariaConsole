@@ -49,7 +49,7 @@ namespace ContaBancariaGeen.Services
         {
             if(!_clientes.Any())
             {
-                WriteLine("Não existem clientes cadastrados para serem atualizados, redirecionado ao cadastro...");
+                WriteLine("\nNão existem clientes cadastrados para serem atualizados, redirecionado ao cadastro...\n");
                 var clienteNovo = CadastraCliente();
                 return clienteNovo;
             }
@@ -132,11 +132,22 @@ namespace ContaBancariaGeen.Services
                         AtualizarCliente();
                         break;
                     case 3:
-                        GetClientes();
+                        var clientes = GetClientes();
+
+                        if(!clientes.Any())
+                        {
+                            WriteLine("\nNão existem clientes cadastrados!\n");
+                            break;
+                        }
+                        foreach(var cliente in clientes)
+                        {
+                            WriteLine($"Sr. {cliente.Nome}, CPF: {cliente.Cpf}");
+                        }
                         break;
                     case 4:
                         condicao = false;
                         WriteLine("Retornando ao menu....");
+                        ReadKey();
                         break;
                     default:
                         WriteLine("Opa, você escolheu uma opção errada!");
@@ -166,6 +177,7 @@ namespace ContaBancariaGeen.Services
                 WriteLine("O CPF informado é igual ao de outro cliente, por favor informe outro!");
                 Write("\n Digite um CPF válido com 11 digitos numericos: ");
                 cpf = ReadLine();
+                cpf = ValidaCpfLength(cpf);
             }
 
             return cpf;

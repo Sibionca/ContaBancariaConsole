@@ -54,7 +54,7 @@ namespace ContaBancariaGeen.Services
                     _contaService.ServicosConta();
                 } else
                 {
-
+                    _clienteService.ServicosCliente();
                 }
 
                 Clear();
