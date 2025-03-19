@@ -52,6 +52,7 @@ namespace ContaBancariaGeen.Services
             if(conta.Consultar() == 0)
             {
                 WriteLine("Não é possível realizar saque pois seu saldo atual é 0.");
+                ReadKey();
                 return;
             }
 
@@ -64,11 +65,13 @@ namespace ContaBancariaGeen.Services
             if(valor > conta.Consultar())
             {
                 WriteLine("O valor informado é maior que o saldo disponível em conta! Por favor escolha outra operação.");
+                ReadKey();
                 return;
             }
 
             conta.Sacar(valor);
             WriteLine($"Saque no valor de {valor} realizado com sucesso!!\n");
+            ReadKey();
         }
 
         private void ExecutaConsulta()
@@ -78,6 +81,7 @@ namespace ContaBancariaGeen.Services
 
 
             WriteLine($"Seu saldo é de {conta.Consultar()}");
+            ReadKey();
         }
 
         private void ExecutaTransferencia()
@@ -85,32 +89,37 @@ namespace ContaBancariaGeen.Services
             if(_contas.Count == 1)
             {
                 WriteLine("É necessário ter mais de uma conta cadastrada para realizar transferências!");
+                ReadKey();
                 return;
             }
 
-            MostraContas("De qual conta você deseja transferir?");
+            var textoOrigem = "\nDe qual conta origem você deseja transferir?\n";
+            MostraContas(textoOrigem);
 
             var contaOrigem = ValidaConta();
 
             if (contaOrigem.Consultar() == 0)
             {
                 WriteLine("Não é possível realizar transferências pois seu saldo atual é 0.");
+                ReadKey();
                 return;
             }
 
             WriteLine($"\nSeu saldo atual é de {contaOrigem.Consultar()}");
 
-            MostraContas("Para qual conta você deseja transferir?");
+            var textoDestino = "\nPara qual conta destino você deseja transferir?\n";
+            MostraContas(textoDestino);
 
             var contaDestino = ValidaConta();
 
             if(contaOrigem.Numero == contaDestino.Numero)
             {
                 WriteLine("Não é possível realizar transferências para a mesma conta.");
+                ReadKey();
                 return;
             }
 
-            Write("Qual valor que deseja transferir?: ");
+            Write("\nQual valor que deseja transferir?: ");
 
             var entrada = ReadLine();
             var valor = ValidaInput.ValidaDecimal(entrada);
@@ -118,11 +127,13 @@ namespace ContaBancariaGeen.Services
             if (valor > contaOrigem.Consultar())
             {
                 WriteLine("O valor informado é maior que o saldo disponível em conta! Por favor escolha outra operação.");
+                ReadKey();
                 return;
             }
 
             contaOrigem.Transferir(valor, contaDestino);
-            WriteLine($"Transferencia no valor de {valor} realizada com sucesso!!\n");
+            WriteLine($"\nTransferencia no valor de {valor} realizada com sucesso!!\n");
+            ReadKey();
         }
 
         public void ServicosConta()
@@ -132,13 +143,13 @@ namespace ContaBancariaGeen.Services
             while(condicao)
             {
 
-                WriteLine("\nQual operações bancárias você deseja efetuar?: ");
+                WriteLine("\n\nQual operações bancárias você deseja efetuar?: ");
                 WriteLine("1 - Depósito");
                 WriteLine("2 - Saque");
                 WriteLine("3 - Consultar saldo");
                 WriteLine("4 - Transferir");
                 WriteLine("5 - Voltar ao menu");
-                Write("Digite a opção: ");
+                Write("\nDigite a opção: \n");
 
                 var entrada = ReadLine();
                 var resposta = ValidaInput.ValidaInt(entrada);
@@ -160,6 +171,7 @@ namespace ContaBancariaGeen.Services
                     case 5:
                         condicao = false;
                         WriteLine("Retornando ao menu....");
+                        ReadKey();
                         break;
                     default:
                         WriteLine("Opa, você escolheu uma opção errada!");

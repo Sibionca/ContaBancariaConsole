@@ -8,7 +8,7 @@ namespace ContaBancariaGeen.Models
 {
     class Conta
     {
-        private readonly int numeroContaIncrement = 0;
+        private static int numeroContaIncrement = 1;
         public int Numero { get; set; }
         private decimal Saldo { get; set; }
         public Cliente Cliente { get; set; }

@@ -54,14 +54,14 @@ namespace ContaBancariaGeen.Services
                 return clienteNovo;
             }
 
-            WriteLine("Qual cliente você gostaria de atualizar?");
+            WriteLine("Qual cliente você gostaria de atualizar?\n");
 
             foreach(var c in  _clientes)
             {
                 WriteLine($"Sr(a) {c.Nome}, CPF: {c.Cpf}");
             }
 
-            Write("Informe o CPF: ");
+            Write("\nInforme o CPF: ");
 
             var cpf = ReadLine();
 
@@ -118,7 +118,7 @@ namespace ContaBancariaGeen.Services
                 WriteLine("2 - Atualizar");
                 WriteLine("3 - Listar");
                 WriteLine("4 - Voltar ao menu");
-                Write("Digite a opção: ");
+                Write("Digite a opção: \n");
 
                 var entrada = ReadLine();
                 var resposta = ValidaInput.ValidaInt(entrada);
@@ -143,6 +143,7 @@ namespace ContaBancariaGeen.Services
                         {
                             WriteLine($"Sr. {cliente.Nome}, CPF: {cliente.Cpf}");
                         }
+                        ReadKey();
                         break;
                     case 4:
                         condicao = false;
