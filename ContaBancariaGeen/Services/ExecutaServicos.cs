@@ -46,9 +46,6 @@ namespace ContaBancariaGeen.Services
                     {
                         WriteLine("Você precisa cadastrar um cliente primeiro, redirecionando...\n\n");
                         var cliente = _clienteService.CadastraCliente();
-
-                        WriteLine($"Agora cadastraremos uma conta para o senhor(a)!");
-                        var conta = _contaService.CadastrarConta(cliente);
                     }
 
                     _contaService.ServicosConta();
