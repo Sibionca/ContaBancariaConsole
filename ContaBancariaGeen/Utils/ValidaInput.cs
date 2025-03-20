@@ -29,7 +29,17 @@ namespace ContaBancariaGeen.Utils
             while (true)
             {        
                 if (decimal.TryParse(entrada, out numero))
+                {
+                    if(numero < 0)
+                    {
+                        Console.WriteLine("O valor não pode ser negativo! Digite um valor positivo.");
+                        Console.Write("Digite o novo valor: ");
+                        entrada = Console.ReadLine();
+                        continue;
+                    }
+
                     return numero;
+                }
 
                 Console.WriteLine("Entrada inválida! Digite um valor decimal.\n");
 

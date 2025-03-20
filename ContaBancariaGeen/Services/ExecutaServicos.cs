@@ -71,7 +71,7 @@ namespace ContaBancariaGeen.Services
 
             while (opcao != 1 && opcao != 2)
             {
-                WriteLine("\nDigite uma opção valida carai! 1 ou 2");
+                WriteLine("\nDigite uma opção válida!");
                 Write("Insira 1 ou 2: ");
                 opcao = ValidaInput.ValidaInt(ReadLine());
             }
